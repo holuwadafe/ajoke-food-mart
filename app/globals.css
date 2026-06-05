@@ -1,0 +1,392 @@
+/* ─── Google Fonts Import (must come before Tailwind) ──────────────────────── */
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Jost:wght@300;400;500;600;700&family=Cinzel:wght@400;500;600;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── CSS Custom Properties ─────────────────────────────────────────────────── */
+:root {
+  --gold-primary:   #D4AF37;
+  --gold-light:     #FFE06B;
+  --gold-dark:      #C49B2A;
+  --gold-pale:      #FFF8D6;
+  --black-primary:  #080808;
+  --black-card:     #111111;
+  --black-medium:   #1A1A1A;
+  --black-soft:     #2A2A2A;
+  --text-primary:   #F5F0E0;
+  --text-muted:     #9A8C6E;
+  --glass-bg:       rgba(255, 255, 255, 0.04);
+  --glass-border:   rgba(212, 175, 55, 0.18);
+  --glass-shadow:   rgba(0, 0, 0, 0.6);
+  --transition:     cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.light {
+  --black-primary: #F8F5EE;
+  --black-card:    #FFFFFF;
+  --black-medium:  #F0EBE0;
+  --black-soft:    #E5DDD0;
+  --text-primary:  #1A1208;
+  --text-muted:    #6B5A3A;
+  --glass-bg:      rgba(0, 0, 0, 0.03);
+  --glass-border:  rgba(212, 175, 55, 0.25);
+  --glass-shadow:  rgba(0, 0, 0, 0.12);
+}
+
+/* ─── Base Styles ─────────────────────────────────────────────────────────── */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  background-color: var(--black-primary);
+  color: var(--text-primary);
+  font-family: "Jost", sans-serif;
+  overflow-x: hidden;
+  transition: background-color 0.3s var(--transition), color 0.3s var(--transition);
+}
+
+/* ─── Selection ───────────────────────────────────────────────────────────── */
+::selection {
+  background: rgba(212, 175, 55, 0.35);
+  color: #fff;
+}
+
+/* ─── Scrollbar ───────────────────────────────────────────────────────────── */
+::-webkit-scrollbar        { width: 5px; }
+::-webkit-scrollbar-track  { background: var(--black-primary); }
+::-webkit-scrollbar-thumb  { background: var(--gold-primary); border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: var(--gold-light); }
+
+/* ─── Utility Classes ─────────────────────────────────────────────────────── */
+.font-display { font-family: "Cormorant Garamond", Georgia, serif; }
+.font-accent  { font-family: "Cinzel", serif; }
+.font-body    { font-family: "Jost", sans-serif; }
+
+/* Gold gradient text */
+.text-gold-gradient {
+  background: linear-gradient(135deg, #C49B2A 0%, #FFE06B 40%, #D4AF37 60%, #FFE06B 80%, #C49B2A 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 4s linear infinite;
+}
+
+@keyframes shimmer {
+  0%   { background-position: 0% center; }
+  100% { background-position: 200% center; }
+}
+
+/* Glassmorphism card */
+.glass-card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 8px 32px var(--glass-shadow), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  transition: all 0.35s var(--transition);
+}
+
+.glass-card:hover {
+  border-color: rgba(212, 175, 55, 0.4);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.7),
+              0 0 30px rgba(212, 175, 55, 0.12),
+              inset 0 1px 0 rgba(255, 255, 255, 0.09);
+  transform: translateY(-4px);
+}
+
+/* Gold button */
+.btn-gold {
+  background: linear-gradient(135deg, #D4AF37 0%, #FFE06B 50%, #C49B2A 100%);
+  background-size: 200% 200%;
+  color: #0A0A0A;
+  font-weight: 700;
+  font-family: "Jost", sans-serif;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  transition: all 0.35s var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-gold::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #FFE06B 0%, #D4AF37 50%, #FFE06B 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.btn-gold:hover::before { opacity: 1; }
+.btn-gold:hover { box-shadow: 0 0 25px rgba(212, 175, 55, 0.5), 0 6px 20px rgba(212, 175, 55, 0.25); transform: translateY(-2px); }
+.btn-gold:active { transform: translateY(0); }
+
+/* Gold border button */
+.btn-outline-gold {
+  background: transparent;
+  border: 1px solid var(--gold-primary);
+  color: var(--gold-primary);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  transition: all 0.3s var(--transition);
+}
+.btn-outline-gold:hover {
+  background: var(--gold-primary);
+  color: #0A0A0A;
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.35);
+}
+
+/* Section label */
+.section-label {
+  font-family: "Cinzel", serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold-primary);
+}
+
+/* Section heading */
+.section-heading {
+  font-family: "Cormorant Garamond", serif;
+  line-height: 1.1;
+}
+
+/* Responsive section spacing — tighter on mobile/tablet */
+.section-pad {
+  padding: 2.5rem 1rem;
+}
+
+@media (min-width: 768px) {
+  .section-pad {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section-pad {
+    padding-top: 7rem;
+    padding-bottom: 7rem;
+  }
+}
+
+.section-header-gap {
+  margin-bottom: 1.75rem;
+}
+
+@media (min-width: 768px) {
+  .section-header-gap {
+    margin-bottom: 3rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section-header-gap {
+    margin-bottom: 4rem;
+  }
+}
+
+/* Gold divider line */
+.gold-line {
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold-primary), transparent);
+}
+
+/* Floating animation */
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  33%       { transform: translateY(-12px) rotate(1deg); }
+  66%       { transform: translateY(-6px) rotate(-1deg); }
+}
+
+.animate-float      { animation: float 6s ease-in-out infinite; }
+.animate-float-slow { animation: float 9s ease-in-out infinite; }
+.animate-float-mid  { animation: float 7s ease-in-out infinite 1s; }
+
+/* Particle */
+@keyframes rise {
+  0%   { transform: translateY(0) translateX(0) scale(0) rotate(0deg); opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 0.4; }
+  100% { transform: translateY(-100vh) translateX(40px) scale(1) rotate(360deg); opacity: 0; }
+}
+
+/* Pulse ring */
+@keyframes pulseRing {
+  0%   { transform: scale(0.8); opacity: 0.8; }
+  100% { transform: scale(2.5); opacity: 0; }
+}
+
+/* Counter animation */
+.counter-number {
+  font-feature-settings: "tnum";
+  font-variant-numeric: tabular-nums;
+}
+
+/* WhatsApp button pulse */
+@keyframes waPulse {
+  0%   { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5); }
+  70%  { box-shadow: 0 0 0 16px rgba(37, 211, 102, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+}
+.wa-pulse { animation: waPulse 2s infinite; }
+
+/* Scroll progress bar */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #D4AF37, #FFE06B, #D4AF37);
+  z-index: 9999;
+  transition: width 0.1s linear;
+}
+
+/* Loading overlay */
+.loading-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #080808;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+@keyframes spinLoader {
+  0%   { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loader-ring {
+  width: 60px;
+  height: 60px;
+  border: 3px solid rgba(212, 175, 55, 0.15);
+  border-top-color: #D4AF37;
+  border-radius: 50%;
+  animation: spinLoader 0.9s linear infinite;
+}
+
+/* Hide on load */
+.page-content { opacity: 0; transition: opacity 0.5s ease; }
+.page-content.loaded { opacity: 1; }
+
+/* Search bar */
+.search-bar {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  border-radius: 9999px;
+  transition: all 0.3s var(--transition);
+}
+.search-bar:focus-within {
+  border-color: rgba(212, 175, 55, 0.5);
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+}
+
+/* Category pill */
+.category-pill {
+  font-family: "Jost", sans-serif;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  transition: all 0.25s var(--transition);
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+
+.category-pill.active {
+  background: linear-gradient(135deg, #D4AF37, #FFE06B);
+  color: #0A0A0A;
+  border-color: transparent;
+}
+
+.category-pill:not(.active) {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(212, 175, 55, 0.2);
+  color: var(--text-muted);
+}
+
+.category-pill:not(.active):hover {
+  border-color: rgba(212, 175, 55, 0.5);
+  color: var(--gold-primary);
+}
+
+/* Testimonial card */
+.testimonial-card {
+  min-width: 340px;
+  max-width: 420px;
+}
+
+@media (max-width: 480px) {
+  .testimonial-card { min-width: calc(100vw - 3rem); }
+}
+
+/* Map placeholder */
+.map-placeholder {
+  background: radial-gradient(circle at center,
+    rgba(212, 175, 55, 0.08) 0%,
+    rgba(212, 175, 55, 0.03) 50%,
+    transparent 100%
+  );
+  border: 1px solid rgba(212, 175, 55, 0.15);
+}
+
+/* Product image area */
+.product-img-area {
+  position: relative;
+  overflow: hidden;
+}
+.product-img-area::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 60%, rgba(0,0,0,0.6) 100%);
+}
+
+/* Navbar active link */
+.nav-link-active {
+  color: var(--gold-primary) !important;
+  position: relative;
+}
+.nav-link-active::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--gold-primary);
+}
+
+/* ─── Light mode overrides ──────────────────────────────────────────────────── */
+.light body,
+.light {
+  background-color: #F8F5EE;
+  color: #1A1208;
+}
+
+.light .glass-card {
+  background: rgba(255, 255, 255, 0.7);
+  border-color: rgba(212, 175, 55, 0.25);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+}
+
+.light .glass-card:hover {
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.12), 0 0 30px rgba(212, 175, 55, 0.15);
+}
