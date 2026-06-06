@@ -216,12 +216,19 @@ export default function Footer() {
             © {year} AJOKE FOOD MART. All rights reserved.
           </p>
           <p className="text-xs flex items-center gap-1" style={{ color: "var(--text-muted)" }}>
-            Made with{" "}
+            Created by holuwadafedev{" "}
             <Heart size={12} style={{ color: "var(--gold-primary)" }} fill="currentColor" />
             {" "}for Quality Food
           </p>
           <p className="text-xs" style={{ color: "var(--text-muted)" }}>
-            Quality You Can Trust
+            For inquiries, email us at{" "}
+            <a
+              href="mailto:holuwadafe@gmail.com"
+              className="hover:text-gold-400 transition-colors"
+              style={{ color: "var(--text-primary)" }}
+            >
+              holuwadafe@gmail.com
+            </a>
           </p>
         </div>
       </div>
